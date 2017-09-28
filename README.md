@@ -1,5 +1,11 @@
-# cyjh-cli安裝
+### cyjh-cli介绍
+`cyjh-cli`可以一键生成项目目录的脚手架工具
 
+目前包含`PC`和`Mobile`两套项目目录模版可以选择生成
+
+同时也可以自定义添加模版文件
+
+### cyjh-cli安裝
 ```
 //安装cyjh-cli模块到全局
 npm install cyjh-cli -g
