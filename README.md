@@ -1,12 +1,10 @@
-# **cyjh-cli**教程步骤
+# cyjh-cli安裝
 
-### 在`cyjh-cli`目录打开`cmd`命令控制台，执行`npm install -g`;
->打开方式：对着cyjh-cli目录空白处按住`shift`键右击——选择“在此处打开命令窗口”菜单
 ```
 //安装cyjh-cli模块到全局
-npm install -g
+npm install cyjh-cli -g
 //或者
-npm install -g --registry=https://registry.npm.taobao.org
+npm install cyjh-cli -g --registry=https://registry.npm.taobao.org
 
 //查看版本号
 cyjh -V
