@@ -1,0 +1,23 @@
+@import "Reset.scss";
+@import "Mixin.scss";
+
+/* 滚动条 */
+.scroll::-webkit-scrollbar {
+  width: 7px !important;
+  display: block !important;
+}
+
+/* Handle样式 */
+.scroll::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+}
+
+/*hover到滚动条上*/
+.scroll::-webkit-scrollbar-thumb:vertical:hover {
+  background-color: lighten(#ddd,5%);
+}
+
+/*滚动条按下*/
+.scroll::-webkit-scrollbar-thumb:vertical:active {
+  background-color: darken(#ddd,5%);
+}

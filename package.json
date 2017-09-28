@@ -1,0 +1,31 @@
+{
+  "name": "cyjh-cli",
+  "version": "1.0.0",
+  "description": "cli for cyjh",
+  "main": "index.js",
+  "bin": {
+    "cyjh": "bin/cyjh",
+    "cyjh-init": "bin/cyjh-init"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "cyjh"
+  ],
+  "author": "_ihhu",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "chalk": "^2.1.0",
+    "clear": "0.0.1",
+    "commander": "^2.11.0",
+    "figlet": "^1.2.0",
+    "fs-extra": "^4.0.2",
+    "inquirer": "^3.2.3"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  }
+}

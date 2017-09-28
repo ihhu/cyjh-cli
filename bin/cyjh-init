@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+const program = require('commander')
+
+program.option("-M, --mobile", "use mobile template").option("-P, --pc","use pc template");
+program.parse(process.argv);
+
+const options={
+    mobile:program.mobile||false,
+    pc:program.pc||false
+}
+
+require("../command/init")(options);
