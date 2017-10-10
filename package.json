@@ -7,6 +7,10 @@
     "cyjh": "bin/cyjh",
     "cyjh-init": "bin/cyjh-init"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ihhu/cyjh-cli.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

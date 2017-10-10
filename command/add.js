@@ -5,7 +5,7 @@ const fs=require("../lib/file");
 const questions=require("../lib/questions");
 const config=require("../lib/config");
 
-
+let questionAdd=questions.questionAdd;
 let TemplatePath=path.resolve(__dirname,"../template/");
 let ProjectPath=path.resolve(process.cwd(),"./");
 
@@ -31,31 +31,24 @@ function addQuestions(){
     })
 }
 
-function init(opts){
-    let bAll=false;
-    let toPath=ProjectPath;
-    let fromPath=TemplatePath;
-
+function init(template){
+    let toPath=TemplatePath;
+    let fromPath=ProjectPath;
+    let _path="";
     //user input project info
-    inquirer.prompt(questions.questionOne).then(args=>{
-        toPath=path.join(toPath,args.projectName);
-
-        if(opts.pc&&opts.mobile){
-            bAll=true;
-        }else if(opts.pc){
-            toPath=path.join(toPath,"/PC");
-            fromPath=path.join(fromPath,"/PC");
-        }else if(opts.mobile){
-            toPath=path.join(toPath,"/Mobile")
-            fromPath=path.join(fromPath,"/Mobile");
-        }else{
-            fromPath=path.join(fromPath,args.templateName);
-        }
+    inquirer.prompt(questionAdd).then(({templateName,bAdd})=>{
+        //toPath=path.join(toPath,args.projectName);
+        if(!bAdd){return;}
+        _path=templateName||template;
+       
         //check dir
         return fs.ensureDir(toPath)
     })
+
+    return;
+
     //clear dir
-    .then(flag=>{
+    a.then(flag=>{
         return fs.emptyDir(toPath)
     })
     //copy template
@@ -81,19 +74,23 @@ function init(opts){
 
 
 module.exports=function(opts){
-    console.log(opts);
-    if(opts.templateName){
-        if(/[\\\/\*\?\|\<\>\:\"]+/g.test(opts.templateName)){
+    let templateName=opts.templateName;
+    if(templateName){
+        if(/[\\\/\*\?\|\<\>\:\"]+/g.test(templateName)||/^\.+$/.test(templateName)){
             console.log(`Template name is illegal.`);
             return;
         }
+        questionAdd.shift();
+        console.log(path.join(TemplatePath,templateName));
+        if(fs.fsExistsSync(path.join(TemplatePath,templateName))){
+            questionAdd[0].message=`The template name '${templateName}' already exists, whether it is overwritten`;
+            questionAdd[0].default=false;
+        }else{
+            questionAdd[0].message=`Confirm Template's name：${templateName}`;
+        }
+        
     }
-    return;
-    inquirer.prompt(questions.questionAdd).then(args=>{
-        console.log(args);
-        //check dir
-        return fs.ensureDir(toPath)
-    })
+    init(templateName);
     return;
 }
 
