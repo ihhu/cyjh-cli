@@ -6,6 +6,8 @@ const chalk = require('chalk')
 program.version(require("../package").version);
 program.usage("<command> [options]");
 program.command("init","Generate a new project");
+program.command("add","Add a new Template");
+
 //program.option("-M, --mobile", "use mobile template").option("-P, --pc","use pc template");
 
 program.parse(process.argv);

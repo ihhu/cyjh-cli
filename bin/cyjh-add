@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+const program = require('commander')
+const chalk = require("chalk");
+
+program.usage('<template-name>');
+
+program.on('--help', () => {
+    console.log('  Examples:')
+    console.log()
+    console.log(chalk.gray('    # add a new template'))
+    console.log('    $ cyjh add my-template')
+    console.log()
+})
+
+
+program.parse(process.argv);
+
+let templateName = program.args[0];
+
+require("../command/add")({templateName});

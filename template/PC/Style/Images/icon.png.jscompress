@@ -1,6 +1,6 @@
 ﻿<jscompress public="http://www.jscompress.cn/" command="import-combineset">
 <combinefile path="icon.png">
-    <csspath path="..\Scss\Icon.scss" />
+    <csspath path="..\Scss\_Icon.scss" />
     <encoder value="0" />
     <auto value="1" />
     <randomurl value="0" />
