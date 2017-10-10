@@ -81,7 +81,6 @@ module.exports=function(opts){
             return;
         }
         questionAdd.shift();
-        console.log(path.join(TemplatePath,templateName));
         if(fs.fsExistsSync(path.join(TemplatePath,templateName))){
             questionAdd[0].message=`The template name '${templateName}' already exists, whether it is overwritten`;
             questionAdd[0].default=false;
