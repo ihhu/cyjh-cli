@@ -72,7 +72,6 @@ function init(template){
     })
 }
 
-
 module.exports=function(opts){
     let templateName=opts.templateName;
     if(templateName){
