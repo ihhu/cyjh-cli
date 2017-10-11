@@ -9,7 +9,8 @@
 ```
 //安装cyjh-cli模块到全局
 npm install cyjh-cli -g
-//或者 使用taobao源安装
+
+//使用淘宝镜向源安装
 npm install cyjh-cli -g --registry=https://registry.npm.taobao.org
 
 //查看版本号
