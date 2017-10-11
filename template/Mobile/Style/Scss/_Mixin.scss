@@ -16,7 +16,7 @@ $isMobile:false;
 }
 
 //伸缩盒（旧）
-@mixin box($pack:left,$align:left,$orient:horizontal){
+@mixin box($pack:start,$align:start,$orient:horizontal){
     display: -webkit-box;
     display: box;
     -webkit-box-pack: $pack;

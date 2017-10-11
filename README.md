@@ -9,7 +9,7 @@
 ```
 //安装cyjh-cli模块到全局
 npm install cyjh-cli -g
-//或者
+//或者 使用taobao源安装
 npm install cyjh-cli -g --registry=https://registry.npm.taobao.org
 
 //查看版本号
@@ -39,12 +39,26 @@ cyjh init -P -M
 ```
 
 ### 添加自定义模版文件
-- 创建 **模版文件夹**，如果存在*空文件*夹时,请在*空文件*下创建名为：`.empty`文件
-- 将**模版文件夹**复制到`cyjh-cli`目录template文件夹下（注意：**PC**和**Mobile**文件夹请误删除或者改名）
-- 在`cyjh-cli`目录下打开命令控制命执行`npm install -g`命令将自定义模版添加到全局
-- 使用`cyjh init`即可选择加载 自定义的模版
+- 在需要添加模版的目录下：创建 **模版文件夹**及**模版文件**，如果存在*空文件*夹时,请在*空文件*下创建名为：`.empty`文件
+- 执行`cyjh add`或`cyjh add <template-name>`可添加当前目录模版到全局
+- 执行`cyjh remove`可删除模版
+- 执行`cyjh init`可选择添加的模版生成项目目录
+
+### 自动化编译`*.scss`文件
+
+生成`PC`和`Mobile`项目的根目录存在`_FolderWatchConfig.jscompress`配置文件，该配置文件是**JSCompress软件**[(官网)](https://www.jscompress.cn/)配置生成的。
+
+下载安装**JSCompress软件**打开后，将`_FolderWatchConfig.jscompress`配置文件拖入软件即可**自动化编译`*.scss`文件**。
+
+编译后的`*.css`文件会存放在`Style/Css`目录下。
+
+### 自动化合并压缩`*.png`文件并生成相应的css文件
+
+生成`PC`和`Mobile`项目的`Style/Images`目录下存在`icon.png.jscompress`配置文件。将该配置文件拖入**JSCompress软件**[(官网)](https://www.jscompress.cn/)即可。
+
+**JSCompress软件**会自动合并压缩`Delete/Icon`目录下的图片至`Style/Images`目录。并且会在`Style/Scss`目录下生成`_Icon.scss`文件。
 
 ---
 **要求**：
-- node.js 版本 大于 4.0
-- npm 版本 大于 3.0
+- node >= 4.0
+- npm >= 3.0

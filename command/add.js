@@ -10,27 +10,6 @@ let TemplatePath=path.resolve(__dirname,"../template/");
 let ProjectPath=path.resolve(process.cwd(),"./");
 
 
-function addQuestions(){
-    return fs.readdir(TemplatePath).then(data=>{
-        let tempMap={"Mobile":true,"PC":true};
-        let choices=["PC","Mobile"];
-        data.forEach((value,i)=>{
-            if(!tempMap[value]){
-                tempMap[value]=true;
-                choices.push(value)
-            }
-        })
-        tempMap=undefined;
-        questions.questionOne.push({        
-            name: 'templateName',
-            type: 'list',
-            message: 'Use template:',
-            choices: choices,
-            default:"PC"
-        })
-    })
-}
-
 function init(template){
     let toPath=TemplatePath;
     let fromPath=ProjectPath;
@@ -39,37 +18,29 @@ function init(template){
     inquirer.prompt(questionAdd).then(({templateName,bAdd})=>{
         //toPath=path.join(toPath,args.projectName);
         if(!bAdd){return;}
-        _path=templateName||template;
-       
-        //check dir
-        return fs.ensureDir(toPath)
+        templateName=templateName||template;
+        toPath=path.join(toPath,templateName);
+
+        fs.showCreateDirInfo(`Add template to：${toPath}`);
+
+        fs.ensureDir(toPath).then(flag=>{
+            //empty dir
+            return fs.emptyDir(toPath)
+        }).then(flag=>{
+            //copy template
+            fs.showCreateDirInfo(`\n Start creating Template...`);
+            return fs.copy(fromPath,toPath);
+        }).then(flag=>{
+            //copy end
+            return fs.showCreateDirInfo("\n Creating Template OK...")
+        }).catch(err=>{
+            //error
+            console.log("err:", err);
+        })
     })
 
     return;
 
-    //clear dir
-    a.then(flag=>{
-        return fs.emptyDir(toPath)
-    })
-    //copy template
-    .then(flag=>{
-        fs.showCreateDirInfo(`\n Project directory：${toPath}`);
-        fs.showCreateDirInfo("begin");
-        if(bAll){
-            let aCopy=[fs.copy(`${fromPath}/PC`,`${toPath}/PC`,filterFunc),
-                    fs.copy(`${fromPath}/Mobile`,`${toPath}/Mobile`,filterFunc)]
-            return Promise.all(aCopy) 
-        }
-        return fs.copy(fromPath,toPath,filterFunc);
-    })
-    //copy end
-    .then(flag=>{
-        return fs.showCreateDirInfo("end")
-    })
-    //error
-    .catch(err=>{
-        console.log("err:",err);
-    })
 }
 
 module.exports=function(opts){
@@ -81,7 +52,7 @@ module.exports=function(opts){
         }
         questionAdd.shift();
         if(fs.fsExistsSync(path.join(TemplatePath,templateName))){
-            questionAdd[0].message=`The template name '${templateName}' already exists, whether it is overwritten`;
+            questionAdd[0].message=`The template name '${templateName}' already exists, whether it is overwritten?`;
             questionAdd[0].default=false;
         }else{
             questionAdd[0].message=`Confirm Template's name：${templateName}`;

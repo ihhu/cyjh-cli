@@ -7,6 +7,9 @@ program.version(require("../package").version);
 program.usage("<command> [options]");
 program.command("init","Generate a new project");
 program.command("add","Add a new Template");
+program.command("remove").description("Remove a Template").action(()=>{
+    require("../command/remove")();
+})
 
 //program.option("-M, --mobile", "use mobile template").option("-P, --pc","use pc template");
 
